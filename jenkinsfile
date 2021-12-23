@@ -3,8 +3,10 @@ pipeline {
   stages {
     stage ("2.Copy the project files") {
       steps {
-        sh "mvn clean install"
-        sh "mvn --version"
+        sh "npm install"
+        sh "npm --version"
+        sh "npm run sonar"
+        sh "npm publish"
       }
     }
     stage ("3. Build the project") {
@@ -15,7 +17,7 @@ pipeline {
     
     stage ("4. Build the docker image") {
         steps {
-            sh "docker build -t maven_image_new011 /home/jenkins"
+            sh "docker build -t nodejs_image_0999 /home/jenkins"
         }
     }
   }

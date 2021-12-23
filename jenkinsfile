@@ -1,38 +1,22 @@
-node
-{
- 
-  stage("Check Out Code FROM Git")
-  {
-   git branch: 'proj_test', credentialsId: '', url: 'https://github.com/sunil901/node-js-app-sq.git/nodejs-app-mss-proj/'
- }
- 
- stage("Build")
- {
- nodejs(nodeJSInstallationName: 'nodejs15.2.1') {
-        sh 'npm install'
-    }
- }  
- 
-  stage('Execute SonarQube***Report') {
-     nodejs(nodeJSInstallationName: 'nodejs15.2.1') {
-        sh 'npm run sonar'
-    }
-      
-        } 
-		
-    stage('UploadintoNexus') {
-       nodejs(nodeJSInstallationName: 'nodejs15.2.1') {
-          sh 'npm publish'
+pipeline {
+  agent any
+  stages {
+    stage ("2.Copy the project files") {
+      steps {
+        sh "mvn clean install"
+        sh "mvn --version"
       }
-      
-          }	
- 
- stage('RunNodeJsApp')
- {
- //sh "./scripts/run.sh"
- nodejs(nodeJSInstallationName: 'nodejs15.2.1') {
-        sh 'npm start &'
     }
-}    
+    stage ("3. Build the project") {
+      steps {
+        sh "cp -R /var/lib/jenkins/workspace/cicd_demo/target/* /home/jenkins"
+      }
+    }
     
+    stage ("4. Build the docker image") {
+        steps {
+            sh "docker build -t maven_image_new011 /home/jenkins"
+        }
+    }
+  }
 }

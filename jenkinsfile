@@ -3,7 +3,7 @@ node
  
   stage("Check Out Code FROM Git")
   {
-   git branch: 'proj_test', credentialsId: '', url: 'https://github.com/sunil901/node-js-app-sq.git/'
+   git branch: 'proj_test', credentialsId: '', url: 'https://github.com/sunil901/node-js-app-sq.git/nodejs-app-mss-proj/'
  }
  
  stage("Build")

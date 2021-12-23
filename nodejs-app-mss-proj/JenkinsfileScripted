@@ -1,9 +1,9 @@
 node
 {
  
-  stage("CheckOutCodeGit")
+  stage("Check Out Code FROM Git")
   {
-   git branch: 'master', credentialsId: '65fb834f-a83b-4fe7-8e11-686245c47a65', url: 'https://github.com/bhaskar0504/node-js-application.git'
+   git branch: 'proj_test', credentialsId: '', url: 'https://github.com/sunil901/node-js-app-sq.git/nodejs-app-mss-proj/'
  }
  
  stage("Build")
@@ -13,7 +13,7 @@ node
     }
  }  
  
-  stage('ExecuteSonarQubeReport') {
+  stage('Execute SonarQube***Report') {
      nodejs(nodeJSInstallationName: 'nodejs15.2.1') {
         sh 'npm run sonar'
     }
